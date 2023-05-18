@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"point-of-sale/app/middleware"
 	"point-of-sale/app/model"
@@ -61,9 +62,13 @@ func Login(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
 
-	return c.JSON(http.StatusOK, res.Response(http.StatusOK, "success", "successfully login", map[string]interface{}{
+	response := res.Response(http.StatusOK, "success", "successfully login", map[string]interface{}{
 		"token": token,
-	}))
+	})
+
+	fmt.Println("")
+	fmt.Println(response)
+	return c.JSON(http.StatusOK, response)
 }
 
 func Current(c echo.Context) error {
